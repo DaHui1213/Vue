@@ -10,6 +10,13 @@ import './assets/fonts/iconfont.css'
 import axios from 'axios'
 // 配置请求路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+// 后台登陆拦截 检查是否有token 再发送axios请求时
+// axios请求拦截
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+
+})
 
 Vue.prototype.$http = axios
 
